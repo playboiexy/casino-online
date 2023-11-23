@@ -1,3 +1,13 @@
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { VscRuby } from "react-icons/vsc";
+import { IoIosSend } from "react-icons/io";
+
+import { motion } from "framer-motion";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { MdOutlineInsertEmoticon } from "react-icons/md";
+
 const chatMessages = [
   {
     nick: "User123",
@@ -158,28 +168,70 @@ const chatMessages = [
   // ... I tak dalej, aż do 20 wiadomości
 ];
 
-export const Sidebar = () => {
+interface SidebarProps {
+  isClicked: boolean;
+  setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const Sidebar = ({ isClicked, setIsClicked }: SidebarProps) => {
+  const handleClick = () => {
+    setIsClicked((prev) => (prev = !prev));
+  };
   return (
-    <aside className="bg-slate-900  text-white w-80 top-18 fixed flex-col h-full flex p-1 justify-evenly">
-      <ul className="flex flex-col gap-1 w-full h-[78%] overflow-y-scroll">
-        {chatMessages.map((i) => {
-          return (
-            <li
-              key={i.date.toString()}
-              className="bg-slate-700  flex-col rounded-lg p-0.5 flex"
-            >
-              <p className="font-extralight">{i.nick}</p>
-              <p>{i.content}</p>
-            </li>
-          );
-        })}
-      </ul>
-      <form className="mx-0.5 gap-1 flex justify-between mb-6">
-        <input className="rounded-md" />
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
-    </aside>
+    <div
+      className={`z-20  text-white w-80  fixed flex-col h-full  justify-evenly shadow-xl shadow-black duration-500  hidden sm:flex ${
+        isClicked ? "-translate-x-full" : "translate-x-0"
+      } `}
+    >
+      <aside
+        className={`bg-base-200 text-white w-80  fixed flex-col h-full flex p-1 justify-evenly  duration-500 ${
+          isClicked ? "" : "translate-x-0"
+        } `}
+      >
+        <Link href="/rules" className="text-sm underline text-fuchsia-800">
+          Chat Rules
+        </Link>
+        <ul className="flex flex-col gap-1 w-full h-[78%] jus overflow-y-scroll">
+          {chatMessages.map((i) => {
+            return (
+              <li
+                key={i.date.toString()}
+                className="bg-  text-sm flex-col rounded-lg p-0.5 flex "
+              >
+                <div className="flex items-center gap-2">
+                  <Image
+                    src={i.avatarimg ?? ""}
+                    alt="User Avatar"
+                    width={32}
+                    height={32}
+                    className="rounded-xl"
+                  />
+                  <p>{i.nick}</p>
+                </div>
+
+                <p className="font-extralight">{i.content}</p>
+              </li>
+            );
+          })}
+        </ul>
+        <form className="mx-0.5 gap-1 flex input grid-cols-2 mb-10 text-xs">
+          <input className="rounded-md w-96 bg-transparent" />
+          <div className="flex flex-col items-center justify-evenly">
+            <button type="submit" className="">
+              <IoIosSend size={20} />
+            </button>
+            <button type="submit" className="">
+              <MdOutlineInsertEmoticon size={20} />
+            </button>
+          </div>
+        </form>
+      </aside>
+      <button
+        onClick={handleClick}
+        className={`bg-base-100 duration-500 fixed left-[20rem] bottom-20 flex justify-self-end p-2 rounded-r-md  `}
+      >
+        {!isClicked ? <FaArrowLeft size={24} /> : <FaArrowRight size={24} />}
+      </button>
+    </div>
   );
 };

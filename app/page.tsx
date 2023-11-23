@@ -1,18 +1,15 @@
+import { Welcome } from "@/components/sections/Welcome";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab animi ullam
-      maxime placeat praesentium hic possimus, eligendi quod temporibus! Eos,
-      deserunt molestias? Nam doloribus cupiditate maxime, quae commodi possimus
-      molestias. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et
-      quam quas dolores nostrum esse nesciunt incidunt consequuntur, eaque modi
-      quasi ex perspiciatis quibusdam recusandae cupiditate doloribus impedit
-      quae voluptatibus reprehenderit? Lorem ipsum dolor sit amet consectetur
-      adipisicing elit. Asperiores, quasi amet doloremque velit officiis aliquid
-      incidunt provident nihil, debitis harum repellendus quidem temporibus
-      architecto autem! Placeat sed commodi alias odio?
+    <main className="flex sm:ml-96 gap-12 sm:gap-6 flex-col min-h-screen max-w-full items-center justify-start">
+      <section className="grid grid-cols-2 gap-20 py-10">
+        <Welcome />
+        <Welcome />
+      </section>
+      <section className=" ">sad</section>
+      <section>sad</section>
     </main>
   );
 }
