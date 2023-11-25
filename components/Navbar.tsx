@@ -4,23 +4,19 @@ import { HiHome } from "react-icons/hi2";
 import { GiMineExplosion, GiPoolTriangle } from "react-icons/gi";
 import { Sidebar } from "./Sidebar";
 import { VscRuby } from "react-icons/vsc";
+import { IoDiceOutline } from "react-icons/io5";
 
-interface ClickedProps {
-  isClicked: boolean;
-  setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const Navbar = ({ children }: { children: React.ReactNode }) => {
+export const Navbar = () => {
   const [isSession, setIsSession] = useState(true);
-  const [isClicked, setIsClicked] = useState(false);
 
   return (
     <>
-      <nav className="sticky px-2 py-1 top-0 flex bg-base-100 justify-between items-center">
+      <nav className="sticky px-2 py-1 z-50 top-0 flex bg-base-100 justify-between items-center">
         <div className=" flex items-center gap-20 justify-center">
-          <a className="ml-12 sm:text-4xl text-xl font-extrabold">
+          <div className="ml-8 flex sm:text-4xl text-xl font-extrabold">
             Digital Dice
-          </a>
+            <IoDiceOutline size={48} className="text-white" />
+          </div>
 
           <div className="flex sm:gap-6 items-center">
             <a className="btn btn-secondary btn-outline duration-300" href="/">
@@ -94,7 +90,7 @@ export const Navbar = ({ children }: { children: React.ReactNode }) => {
         </div>
       </nav>
 
-      <Sidebar isClicked={isClicked} setIsClicked={setIsClicked} />
+      <Sidebar />
     </>
   );
 };

@@ -25,4 +25,9 @@ body {
   background: linear-gradient(135deg, #280527 25%, transparent 25%) -32px 0, linear-gradient(225deg, #280527 25%, transparent 25%) -32px 0, linear-gradient(315deg, #280527 25%, transparent 25%), linear-gradient(45deg, #280527 25%, transparent 25%);
   background-size: 64px 64px;
   background-color: #534861;
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+  
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
 }

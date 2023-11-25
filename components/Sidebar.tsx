@@ -1,12 +1,16 @@
+"use client";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { VscRuby } from "react-icons/vsc";
 import { IoIosSend } from "react-icons/io";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineInsertEmoticon } from "react-icons/md";
+import { useRouter } from "next/router";
+import { Content } from "next/font/google";
+import Context, { IContext } from "./ContextProvider";
 
 const chatMessages = [
   {
@@ -168,24 +172,24 @@ const chatMessages = [
   // ... I tak dalej, aż do 20 wiadomości
 ];
 
-interface SidebarProps {
-  isClicked: boolean;
-  setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
-}
+export const Sidebar = () => {
+  const { toggleButton, setToggleButton } = React.useContext(
+    Context
+  ) as IContext;
 
-export const Sidebar = ({ isClicked, setIsClicked }: SidebarProps) => {
   const handleClick = () => {
-    setIsClicked((prev) => (prev = !prev));
+    setToggleButton((prev) => (prev = !prev));
   };
+
   return (
     <div
-      className={`z-20  text-white w-80  fixed flex-col h-full  justify-evenly shadow-xl shadow-black duration-500  hidden sm:flex ${
-        isClicked ? "-translate-x-full" : "translate-x-0"
+      className={`z-20  text-white w-80  fixed flex-col h-full  justify-evenly shadow-xl shadow-black duration-500  hidden md:flex ${
+        toggleButton ? "-translate-x-full" : "translate-x-0"
       } `}
     >
       <aside
         className={`bg-base-200 text-white w-80  fixed flex-col h-full flex p-1 justify-evenly  duration-500 ${
-          isClicked ? "" : "translate-x-0"
+          toggleButton ? "" : "translate-x-0"
         } `}
       >
         <Link href="/rules" className="text-sm underline text-fuchsia-800">
@@ -230,7 +234,7 @@ export const Sidebar = ({ isClicked, setIsClicked }: SidebarProps) => {
         onClick={handleClick}
         className={`bg-base-100 duration-500 fixed left-[20rem] bottom-20 flex justify-self-end p-2 rounded-r-md  `}
       >
-        {!isClicked ? <FaArrowLeft size={24} /> : <FaArrowRight size={24} />}
+        {!toggleButton ? <FaArrowLeft size={24} /> : <FaArrowRight size={24} />}
       </button>
     </div>
   );
